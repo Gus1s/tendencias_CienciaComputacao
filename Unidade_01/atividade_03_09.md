@@ -1,10 +1,10 @@
 # Atividade - Refinamento de Prompts
 
 ## Identificação
-- Nome: [SEU NOME AQUI]
-- Turma: [SUA TURMA AQUI]
+- Nome: João Pedro Alves Domingos
+- Turma: d1
 - Data: 03/09/2024
-- Ferramenta de IA utilizada: ChatGPT / Claude / Gemini (escolha a que usou)
+- Ferramenta de IA utilizada: ChatGPT / Claude / Gemini / Copilot 
 
 ---
 
