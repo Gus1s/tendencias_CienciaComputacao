@@ -1,6 +1,6 @@
-# Tendências em Ciência da Computação — Unidade 01
+# Tendências em Ciência da Computação
 
-Este repositório agrupa materiais da disciplina "Tendências em Ciência da Computação" (Unidade 01), com foco em Engenharia de Prompt e uso crítico de Inteligência Artificial, conforme o Plano de Aula da Profª Kadidja.
+Este repositório agrupa materiais da disciplina "Tendências em Ciência da Computação", com foco em Engenharia de Prompt, automação e uso crítico de Inteligência Artificial, conforme o Plano de Aula da Profª Kadidja.
 
 ## Resumo
 Repositório com planos de aula, atividades, slides e recursos de apoio para estudantes e docentes. O conteúdo está organizado por unidades e atividades; o material da aula referente ao dia 27 encontra-se em Unidade_01/atividadedia27.
@@ -49,6 +49,7 @@ Repositório com planos de aula, atividades, slides e recursos de apoio para est
 
 ## Estrutura do repositório
 - Unidade_01/atividadedia27/ — materiais da aula do dia 27 (planos, slides, exercícios);
+- [Unidade_02/AgendaFacil](Unidade_02/AgendaFacil/) — projeto de agendamento com Google Forms, Google Sheets, Make, Gemini API e Gmail;
 - Outras pastas de unidade conforme avanço do semestre.
 
 ## Como contribuir
