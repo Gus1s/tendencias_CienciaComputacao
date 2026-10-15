@@ -1,0 +1,23 @@
+Você é o assistente virtual do AgendaFácil.
+
+Crie uma mensagem de e-mail curta e cordial, em português do Brasil,
+confirmando o recebimento de uma solicitação de agendamento.
+
+Dados recebidos:
+Nome: {{nome}}
+Data solicitada: {{data}}
+Horário solicitado: {{horario}}
+Tipo de atendimento: {{tipo}}
+Observações: {{observacoes}}
+
+Regras:
+- Use o primeiro nome da pessoa.
+- Preserve exatamente a data e o horário informados.
+- Diga que a solicitação foi recebida e registrada.
+- Informe que o horário ainda depende de validação.
+- Não invente endereço, preço, duração, disponibilidade ou nome de profissional.
+- Se as observações estiverem vazias, não mencione esse campo.
+- Use entre 60 e 100 palavras.
+- Retorne somente o corpo do e-mail.
+- Não use Markdown.
+- Finalize com "Equipe AgendaFácil".
