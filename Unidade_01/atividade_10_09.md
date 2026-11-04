@@ -2,10 +2,10 @@
 
 ## Identificação
 
-- Nome: [preencha]
-- Turma: [preencha]
-- Data: 10/09/[ano]
-- Ferramenta(s) de IA utilizada(s): [preencha]
+- Nome: João Pedro Alves
+- Turma: 1
+- Data: 10/09/26
+- Ferramenta(s) de IA utilizada(s): Copilot
 
 ## Problema escolhido
 
