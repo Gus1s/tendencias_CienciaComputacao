@@ -3,7 +3,8 @@
 ## Identificação
 - Nome: João Pedro Alves Domingos
 - Turma: d1
-- Data: 03/09/2024
+- Data: 03/09/2026
+- Correção de metadado (04/11/2026): o valor anterior era 03/09/2024 e foi corrigido agora para manter a data consistente com o registro da atividade.
 - Ferramenta de IA utilizada: ChatGPT / Claude / Gemini / Copilot 
 
 ---
@@ -14,7 +15,7 @@
 Como estudante do oitavo semestre em Ciência da Computação, você já viu arrays, listas ligadas básicas e noções de alocação dinâmica e complexidade. Precisa de uma explicação que conecte conceito, implementação de baixo nível e trade-offs de desempenho para tomar decisões arquiteturais em projetos reais.
 
 ### Problema
-Explicar o conceito de **Listas Ligadas** de forma que um estudante avançado compreenda não apenas "o que é", mas também "como funciona" no nível de memória, custos assintóticos, casos práticos em sistemas e armadilhas em implementações reais.
+Explicar o conceito de **Listas Ligadas** de forma que um estudante avançado compreenda não apenas "o que é", mas também "como funciona" no nível de memória, custos assintóticos, casos práticos e armadilhas em implementações reais.
 
 ### Objetivo
 Obter uma explicação técnica e aplicável que permita:
@@ -33,7 +34,7 @@ Explique o que é uma lista ligada.
 ```
 
 ### Resultado
-Uma lista ligada é uma estrutura de dados linear composta por nós onde cada nó contém um valor e uma referência (ponteiro) para o próximo nó. A estrutura pode ser simplesmente ligada, duplamente ligada ou circular. A principal diferença em relação a arrays é que a memória dos elementos não precisa ser contígua; nós são alocados separadamente e ligados por ponteiros.
+Uma lista ligada é uma estrutura de dados linear composta por nós onde cada nó contém um valor e uma referência (ponteiro) para o próximo nó. A estrutura pode ser simplesmente ligada, dupla ou circular. A principal diferença em relação a arrays é que a memória dos elementos não precisa ser contígua; em vez disso, os nós são alocados separadamente e ligados por ponteiros.
 
 ### Análise - Primeira Impressão
 - **O que funcionou?** Cobriu a definição básica e tipos comuns.
@@ -51,13 +52,13 @@ Uma lista ligada é uma estrutura de dados linear composta por nós onde cada n�
 
 | Elemento | Mudança |
 |---|---|
-| **Papel** | Atuar como professor e engenheiro de software com experiência em sistemas e otimização
-| **Contexto** | Estudante avançado que conhece alocação dinâmica, ponteiros e análise assintótica
-| **Objetivo** | Fornecer entendimento técnico + exemplos de implementação e trade-offs
-| **Público** | Oitavo semestre de CC, familiarizado com C/Python e análise de complexidade
-| **Formato** | Analogia curta, explicação técnica, diagrama de memória, código em C (baixo nível) e Python (alto nível), análise de complexidade e custo prático
-| **Restrições** | Máximo 800 palavras, explique termos avançados quando usados
-| **Critérios** | Ao final, o estudante deve conseguir justificar escolhas entre listas e arrays para um módulo de performance crítico
+| **Papel** | Atuar como professor e engenheiro de software com experiência em sistemas e otimização |
+| **Contexto** | Estudante avançado que conhece alocação dinâmica, ponteiros e análise assintótica |
+| **Objetivo** | Fornecer entendimento técnico + exemplos de implementação e trade-offs |
+| **Público** | Oitavo semestre de CC, familiarizado com C/Python e análise de complexidade |
+| **Formato** | Analogia curta, explicação técnica, diagrama de memória, código em C (baixo nível) e Python (alto nível), análise de complexidade e custo prático |
+| **Restrições** | Máximo 800 palavras, explique termos avançados quando usados |
+| **Critérios** | Ao final, o estudante deve conseguir justificar escolhas entre listas e arrays para um módulo de performance crítico |
 
 ### Prompt
 ```text
@@ -106,7 +107,7 @@ O estudante deve conseguir justificar tecnicamente a escolha por listas ligadas 
 4. Apontar erros avançados: leaks, use-after-free, iterator invalidation, concorrência
 
 ### Hipótese
-O Prompt 3 ficará melhor ao exigir experimentos práticos, diagramas de memória com endereços, exemplos em C que mostrem ALLOC/FREE, e exercícios de benchmark comparando inserção no início para array vs lista.
+O Prompt 3 ficará melhor ao exigir experimentos práticos, diagramas de memória com endereços, exemplos em C que mostrem ALLOC/FREE, e exercícios de benchmark comparando inserção no início e array vs lista.
 
 ### Prompt
 ```text
@@ -152,7 +153,7 @@ Uma lista ligada é como uma cadeia de buffers apontados por referências separa
 
 **Diagrama de memória (ASCII, endereços fictícios):**
 
-```
+```text
 [0x1000] Node A: {val:10, next:0x4F20}
 [0x4F20] Node B: {val:20, next:0xA8C0}
 [0xA8C0] Node C: {val:30, next:NULL}
@@ -249,16 +250,16 @@ class LinkedList:
 
 **Exercício prático (sem solução pronta):**
 1. Implemente uma lista duplamente ligada com nó sentinela em C.
-2. Faça um benchmark: insira 100.000 elementos no início da lista e meça tempo; compare com inserir 100.000 elementos usando list.insert(0) em Python (ou std::vector::insert em C++ no índice 0). Interprete diferenças em termos de número de cópias, realocações e cache misses.
+2. Faça um benchmark: insira 100.000 elementos no início da lista e meça tempo; compare com inserir 100.000 elementos usando list.insert(0) em Python (ou std::vector::insert em C++ no índice 0). Interprete diferenças em termos de memória, realocação e cache misses.
 
 **Pergunta desafiadora:**
-Explique por que inserir 1000 elementos no início de um vetor dinâmico pode exigir O(1000^2) cópias no pior caso enquanto em uma lista ligada o custo é O(1000), e por que, apesar disso, o tempo real pode ainda favorecer o vetor em muitas implementações devido à locality e custo de alocador.
+Explique por que inserir 1000 elementos no início de um vetor dinâmico pode exigir O(1000^2) cópias no pior caso enquanto em uma lista ligada o custo é O(1000), e por que, apesar disso, o tempo real pode favorecer um vetor em aplicações que dependem muito de localidade e cache.
 
 ---
 
 ## Comparação Final
 
-A versão final foca em entendimento técnico e aplicabilidade: diagramas de memória, implementação em C/Python, discuss��es sobre cache e alocador, armadilhas reais e um exercício de benchmark que conecta teoria e prática.
+A versão final foca em entendimento técnico e aplicabilidade: diagramas de memória, implementação em C/Python, discussões sobre cache e alocador, armadilhas reais e um exercício de benchmark que conecta teoria e prática.
 
 ---
 
