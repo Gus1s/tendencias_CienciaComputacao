@@ -1,42 +1,56 @@
 # Organização das atividades da disciplina
 
-Este diagnóstico relaciona o conteúdo encontrado no repositório com o plano
-de aulas de 2026. A classificação considera apenas evidências existentes; uma
-pasta ou arquivo vazio não é tratado como atividade concluída.
+Mapa baseado no plano de aulas de 2026 e nas evidências existentes no
+repositório. Um arquivo vazio ou um projeto de tema próximo não é considerado
+automaticamente uma atividade concluída.
 
-## Situação por aula
+## Unidade I — Fundamentos
 
-| Data | Unidade e tema | Situação | Evidência ou pendência |
+| Data | Atividade do plano | Situação | Local |
 |---|---|---|---|
-| 06/08 | Aula inaugural e criação do repositório | Concluída | O repositório e seu histórico comprovam a atividade. |
-| 13/08 | Fundamentos de IA | Parcial | Existe material introdutório, mas não uma entrega identificada especificamente com a data. |
-| 20/08 | LLMs e sua lógica | Parcial | `Unidade_01/atividadedia20` tem conteúdo, mas precisa de nome, extensão e metadados padronizados. |
-| 27/08 | Prompts simples | Concluída | `Unidade_01/atividade_27_08.md`. |
-| 03/09 | Refinamento de prompts | Concluída | `Unidade_01/atividade_03_09.md`. |
-| 10/09 | Papéis, contexto e restrições | Parcial | `Unidade_01/atividade_10_09.md` ainda é um esqueleto com campos a preencher. |
-| 17/09 | Programação assistida e refatoração | Não encontrada | Faltam código original, refatoração, testes e reflexão. |
-| 24/09 | Automação com IA | Não encontrada | Falta uma entrega identificada para a aula, com execução verificável. |
-| 01/10 | Colaboração humano-IA | Não encontrada | Falta o debate ou estudo de caso solicitado no plano. |
-| 08/10 | Introdução ao Low Code/No Code | Concluída em grupo | O HelpDesk AI documenta Forms, Sheets e Make. |
-| 22/10 | Vibe coding e aplicação híbrida | Concluída em grupo | O HelpDesk AI integra Make, Gemini, Sheets e Gmail. |
-| 29/10 | Limitações, mini-projeto e A2 | Concluída em grupo | Há documentação, evidências, testes, análise crítica e apresentação. |
-| 05/11 | Agentes de IA e chatbot | Parcial | O HelpDesk AI funciona como agente de triagem, mas não comprova um chatbot conversacional separado. |
-| 12/11 | Privacidade e segurança | Parcial | O HelpDesk AI discute LGPD, dados e riscos, mas falta confirmar se a professora pediu um estudo de caso autônomo. |
-| 19/11 | Viés e responsabilidade social | Prevista | Aula ainda futura na data desta auditoria, 15/11/2026. |
-| 26/11 | Projeto final e A1 | Prevista | Entrega ainda futura na data desta auditoria. |
+| 06/08 | Aula inaugural e criação do repositório | Concluída | [Registro](Unidade_01/08_Agosto/06_08_Aula_Inaugural/) |
+| 13/08 | Discussão sobre aplicações reais de IA | Não encontrada | [Pendência](Unidade_01/08_Agosto/13_08_Fundamentos_de_IA/) |
+| 20/08 | Demonstração prática com ChatGPT/Copilot | Encontrada | [Atividade](Unidade_01/08_Agosto/20_08_LLMs_e_Logica/) |
+| 27/08 | Exercícios de criação de prompts simples | Encontrada | [Atividade](Unidade_01/08_Agosto/27_08_Engenharia_de_Prompt/) |
+| 03/09 | Comparar resultados de diferentes prompts | Encontrada | [Atividade](Unidade_01/09_Setembro/03_09_Refinamento_de_Prompts/) |
+| 10/09 | Criar prompts com papéis e restrições | Parcial | [Atividade](Unidade_01/09_Setembro/10_09_Contexto_e_Estrutura_de_Prompts/) |
 
-## Prioridade de regularização
+## Unidade II — Programação Assistida
 
-1. Concluir com respostas e comparação reais a atividade de 10/09.
-2. Produzir as entregas comprováveis de 17/09, 24/09 e 01/10 conforme os enunciados efetivamente fornecidos em sala.
-3. Confirmar com a professora se o agente de triagem do HelpDesk AI atende à atividade de 05/11.
-4. Confirmar se a análise de privacidade do projeto atende à atividade de 12/11 ou se é necessário um estudo de caso separado.
-5. Preparar as atividades de 19/11 e o projeto final de 26/11 sem marcá-los antecipadamente como concluídos.
+| Data | Atividade do plano | Situação | Local |
+|---|---|---|---|
+| 17/09 | Sugestões de código e refatoração | Não encontrada | [Pendência](Unidade_02/09_Setembro/17_09_Programacao_Assistida_e_Refatoracao/) |
+| 24/09 | Scripts automatizados com IA | Não encontrada | [Pendência](Unidade_02/09_Setembro/24_09_Automacao_com_IA/) |
+| 01/10 | Debate e estudo de caso humano–IA | Não encontrada | [Pendência](Unidade_02/10_Outubro/01_10_Colaboracao_Humano_IA/) |
 
-## Regras para completar as pendências
+## Unidade III — Low Code / No Code
 
-- Usar as datas reais de criação e revisão.
-- Não inventar saídas de IA, testes, capturas ou evidências.
-- Identificar claramente o uso de Copilot, ChatGPT, Gemini ou outra ferramenta.
-- Preservar os nomes e a contribuição dos integrantes em trabalhos de grupo.
-- Fazer commits por mudança lógica concluída, sem alterar artificialmente o histórico.
+| Data | Atividade do plano | Situação | Local |
+|---|---|---|---|
+| 08/10 | Demonstração de plataformas como Bubble e Make | Encontrada em projetos | [AgendaFácil](Unidade_03/10_Outubro/08_10_Introducao_Low_Code_No_Code/AgendaFacil/) |
+| 22/10 | Criar aplicação híbrida | Encontrada em grupo | [Registro](Unidade_03/10_Outubro/22_10_Vibecode_e_Integracao_Leve/) |
+| 29/10 | Discussão crítica e mini-projeto | Encontrada em grupo | [HelpDesk AI](Unidade_03/10_Outubro/29_10_Limitacoes_e_Mini_Projeto/HelpDeskAI/) |
+
+## Unidade IV — Agentes, Ética e Projeto Final
+
+| Data | Atividade do plano | Situação | Local |
+|---|---|---|---|
+| 05/11 | Chatbot | Parcial; há agente de triagem, não chatbot comprovado | [Pendência](Unidade_04/11_Novembro/05_11_Agentes_de_IA_e_Chatbot/) |
+| 12/11 | Estudo de caso sobre dados sensíveis | Parcial; há análise de LGPD no projeto | [Pendência](Unidade_04/11_Novembro/12_11_Privacidade_e_Seguranca/) |
+| 19/11 | Debate orientado sobre viés | Prevista | [Pendência](Unidade_04/11_Novembro/19_11_Vies_e_Responsabilidade_Social/) |
+| 26/11 | Trabalho em grupo e exposição do projeto final | Prevista | [Pendência](Unidade_04/11_Novembro/26_11_Projeto_Final/) |
+
+## Avaliações
+
+| Data | Avaliação | Situação | Local |
+|---|---|---|---|
+| 29/10 | Prova teórico-prática A2 | Não encontrada como entrega específica | [Pendência](Avaliacoes/10_Outubro/29_10_Avaliacao_A2/) |
+| 26/11 | A1 e reflexão sobre aprendizados | Prevista | [Pendência](Avaliacoes/11_Novembro/26_11_Avaliacao_A1/) |
+| 03, 10 e 17/12 | Período da Avaliação Final; prova em 17/12 | Prevista | [Pendência](Avaliacoes/12_Dezembro/17_12_Avaliacao_Final/) |
+
+## Próximas ações
+
+1. Concluir 10/09 com a experiência e as respostas reais do aluno.
+2. Localizar ou realizar, conforme os enunciados de sala, 17/09, 24/09 e 01/10.
+3. Confirmar se o HelpDesk AI pode ser aceito para 05/11 e 12/11.
+4. Produzir 19/11, 26/11 e as avaliações somente com enunciado e evidência reais.
