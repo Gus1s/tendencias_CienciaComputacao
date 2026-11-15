@@ -29,6 +29,7 @@ histórico Git e os créditos dos integrantes.
 ## Acompanhamento
 
 - [Situação de todas as aulas](ORGANIZACAO_ATIVIDADES.md)
+- [Demonstrativo do que foi organizado e como continuar](DEMONSTRATIVO_ORGANIZACAO.md)
 - [Prompt para trabalhar nas pendências com o Copilot](PROMPT_COPILOT_ATIVIDADES_PENDENTES.md)
 
 ## Regras de integridade acadêmica
