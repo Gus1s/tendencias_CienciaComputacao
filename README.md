@@ -1,69 +1,40 @@
 # Tendências em Ciência da Computação
 
-Este repositório agrupa materiais da disciplina "Tendências em Ciência da Computação", com foco em Engenharia de Prompt, automação e uso crítico de Inteligência Artificial, conforme o Plano de Aula da Profª Kadidja.
+Repositório acadêmico organizado conforme o plano de aulas de 2026 da Profª
+Kadidja Valéria. A estrutura segue a sequência **unidade → mês → data e tema**.
 
-## Resumo
-Repositório com planos de aula, atividades, slides e recursos de apoio para estudantes e docentes. O conteúdo está organizado por unidades e atividades; o material da aula referente ao dia 27 encontra-se em Unidade_01/atividadedia27.
+## Organização
 
-## Modelo 5W (Quem, O quê, Quando, Onde, Por quê)
+| Unidade | Período | Conteúdo |
+|---|---|---|
+| [Unidade 01](Unidade_01/) | Agosto e setembro | Fundamentos de IA e Engenharia de Prompt |
+| [Unidade 02](Unidade_02/) | Setembro e outubro | Programação Assistida por IA |
+| [Unidade 03](Unidade_03/) | Outubro | Low Code, No Code e Vibecode |
+| [Unidade 04](Unidade_04/) | Novembro | Agentes de IA, ética e projeto final |
+| [Avaliações](Avaliacoes/) | Outubro a dezembro | A2, A1 e Avaliação Final |
 
-### Quem (Who)
-- Professora/autor do plano: Profª Kadidja.
-- Público-alvo: estudantes do curso de Ciência da Computação / áreas afins (ensino superior).
-- Colaboradores: docentes, monitores e alunos — contribuições via pull request são bem-vindas.
+Cada pasta de aula possui a data no formato `DD_MM`, seguida do tema. Quando
+não existe uma entrega comprovável no histórico, há um arquivo `PENDENTE.md`
+com o enunciado do plano e o que ainda precisa ser fornecido pelo aluno.
 
-### O quê (What)
-- Artefatos: plano de aula (PDF), slides, exercícios práticos, exemplos de prompts, guias de discussão e avaliações.
-- Objetivos pedagógicos (síntese):
-  - Introduzir tendências atuais em Ciência da Computação relacionadas a IA;
-  - Desenvolver habilidades em engenharia de prompt para interagir com modelos de linguagem;
-  - Promover análise crítica sobre vieses, limitações e uso ético da IA;
-  - Aplicar conhecimentos em atividades práticas e avaliações formativas.
+## Projetos existentes
 
-### Quando (When)
-- Semestre/ano: 2026 (Unidade 01).
-- Sequência: materiais organizados para serem aplicados conforme cronograma do plano de aula (aulas teóricas, práticas e atividades assíncronas).
+- [AgendaFácil](Unidade_03/10_Outubro/08_10_Introducao_Low_Code_No_Code/AgendaFacil/) — protótipo com Google Forms, Sheets, Make, Gemini e Gmail;
+- [HelpDesk AI](Unidade_03/10_Outubro/29_10_Limitacoes_e_Mini_Projeto/HelpDeskAI/) — trabalho colaborativo de Gustavo Negreiros e João Pedro Alves.
 
-### Onde (Where)
-- Local da disciplina: formato presencial e/ou remoto (híbrido), conforme planejamento local.
-- Local dos materiais: este repositório GitHub — pasta Unidade_01/atividadedia27.
-- Ambientes de prática: laboratórios de informática e plataformas online indicadas no plano (links no material).
+O HelpDesk AI foi incorporado do repositório
+[`sztsu/helpdesk-ai`](https://github.com/sztsu/helpdesk-ai), preservando o
+histórico Git e os créditos dos integrantes.
 
-### Por quê (Why)
-- Finalidade geral: capacitar estudantes para reconhecer e usar ferramentas de IA com responsabilidade e eficácia.
-- Resultados esperados:
-  - Compreensão das principais tendências tecnológicas;
-  - Capacidade de escrever prompts claros e avaliar respostas de IA;
-  - Consciência crítica sobre implicações éticas e sociais da IA.
+## Acompanhamento
 
-## Como (How) — resumo das estratégias de ensino
-- Aulas expositivas curtas para contextualizar conceitos;
-- Oficinas práticas com exemplos e exercícios de engenharia de prompt;
-- Trabalho em grupo para resolver problemas reais e produzir mini-projetos;
-- Avaliação por entregas, relatório reflexivo e apresentação dos resultados.
+- [Situação de todas as aulas](ORGANIZACAO_ATIVIDADES.md)
+- [Demonstrativo do que foi organizado e como continuar](DEMONSTRATIVO_ORGANIZACAO.md)
+- [Prompt para trabalhar nas pendências com o Copilot](PROMPT_COPILOT_ATIVIDADES_PENDENTES.md)
 
-## Competências e evidências
-- Técnicas: formular prompts eficientes, interpretar respostas, detectar limitações e vieses;
-- Críticas: argumentar sobre impacto social e ético, validar fontes e resultados;
-- Evidências: entregas de atividade, código/exemplos, relatórios e apresentações.
+## Regras de integridade acadêmica
 
-## Estrutura do repositório
-- Unidade_01/atividadedia27/ — materiais da aula do dia 27 (planos, slides, exercícios);
-- [Unidade_02/AgendaFacil](Unidade_02/AgendaFacil/) — projeto de agendamento com Google Forms, Google Sheets, Make, Gemini API e Gmail;
-- Outras pastas de unidade conforme avanço do semestre.
-
-## Como contribuir
-1. Abra uma issue descrevendo a proposta de melhoria ou correção;
-2. Abra um pull request com mudanças claras e referência à issue;
-3. Siga o padrão de commits e adicione descrição do que foi alterado.
-
-## Licença
-- Indique a licença do material (ex.: CC BY-SA para conteúdo didático ou MIT para código). Adicione o arquivo LICENSE no repositório.
-
-## Contato
-- Profª Kadidja — kadidja.oliveira@udf.edu.br
-- Repositório: https://github.com/Gus1s/tendencias_CienciaComputacao
-
----
-
-Observação: este README foi criado com base no plano de aula referenciado; se quiser que eu incorpore trechos exatos dos objetivos do PDF (se houver seções específicas nomeadas "Objetivos"), posso atualizar o README após você confirmar o caminho do arquivo no repositório ou colar a seção aqui.
+- Não alterar artificialmente datas de commits.
+- Não inventar respostas, testes, capturas ou evidências.
+- Identificar o uso de ferramentas de IA.
+- Preservar autoria e contribuições em trabalhos de grupo.
