@@ -48,9 +48,14 @@ Repositório com planos de aula, atividades, slides e recursos de apoio para est
 - Evidências: entregas de atividade, código/exemplos, relatórios e apresentações.
 
 ## Estrutura do repositório
-- Unidade_01/atividadedia27/ — materiais da aula do dia 27 (planos, slides, exercícios);
+- [Unidade_01](Unidade_01/) — fundamentos de IA e engenharia de prompt;
 - [Unidade_02/AgendaFacil](Unidade_02/AgendaFacil/) — projeto de agendamento com Google Forms, Google Sheets, Make, Gemini API e Gmail;
-- Outras pastas de unidade conforme avanço do semestre.
+- [Unidade_03/HelpDeskAI](Unidade_03/HelpDeskAI/) — trabalho colaborativo de No Code, Low Code e Vibecode desenvolvido por Gustavo Negreiros e João Pedro Alves;
+- [ORGANIZACAO_ATIVIDADES.md](ORGANIZACAO_ATIVIDADES.md) — correspondência entre o plano de aulas, as entregas existentes e as pendências identificadas.
+
+O projeto HelpDesk AI foi incorporado do repositório original
+[`sztsu/helpdesk-ai`](https://github.com/sztsu/helpdesk-ai), preservando o
+histórico Git e a autoria dos integrantes.
 
 ## Como contribuir
 1. Abra uma issue descrevendo a proposta de melhoria ou correção;
