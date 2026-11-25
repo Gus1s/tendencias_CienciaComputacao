@@ -33,13 +33,15 @@ automaticamente uma atividade concluída.
 
 ## Unidade IV — Agentes, Ética e Projeto Final
 
+Atualizada em 25/11/2026 com base no HelpDesk AI 2.0, commit `8dde18f`.
+
 | Data | Atividade do plano | Situação | Local |
 |---|---|---|---|
-| 05/11 | Criação de agentes de IA (1,0) | Especificação e roteiro de testes incluídos; evidências do aluno a anexar | [Atividade](Unidade_04/11_Novembro/05_11_Criacao_de_Agentes_de_IA/) |
-| 12/11 | Chatbot e ferramentas, com especificação (1,0) | Especificação completa; interface executável ainda não comprovada | [Atividade](Unidade_04/11_Novembro/12_11_Chatbot_e_Ferramentas/) |
-| 19/11 | Viés algorítmico e responsabilidade social (1,0) | Análise orientada e roteiro de teste incluídos | [Atividade](Unidade_04/11_Novembro/19_11_Vies_e_Responsabilidade_Social/) |
-| 26/11 | Apresentação da solução inteligente (1,0) | Projeto e documentação completa vinculados | [Atividade](Unidade_04/11_Novembro/26_11_Projeto_Final/) |
-| 26/11 | Integração dos conceitos e participação no GitHub (1,0) | Checklist de organização, documentação e histórico incluído | [Atividade](Unidade_04/11_Novembro/26_11_Projeto_Final/) |
+| 05/11 | Criação de agentes de IA (1,0) | Agente executável de 4 camadas, tools, memória, RAG e testes documentados | [Atividade](Unidade_04/11_Novembro/05_11_Criacao_de_Agentes_de_IA/) |
+| 12/11 | Chatbot e ferramentas, com especificação (1,0) | Interface executável no GitHub Pages, comparação de ferramentas e testes conversacionais | [Atividade](Unidade_04/11_Novembro/12_11_Chatbot_e_Ferramentas/) |
+| 19/11 | Viés algorítmico e responsabilidade social (1,0) | Riscos, mitigação, reflexão e casos TC-07/08/19–22 vinculados | [Atividade](Unidade_04/11_Novembro/19_11_Vies_e_Responsabilidade_Social/) |
+| 26/11 | Apresentação da solução inteligente (1,0) | Roteiro, aplicação, documentação v2.0 e evidências 24/24 vinculados | [Atividade](Unidade_04/11_Novembro/26_11_Projeto_Final/) |
+| 26/11 | Integração dos conceitos e participação no GitHub (1,0) | Organização, evolução v1.x→v2.0, autoria e contribuição registradas | [Atividade](Unidade_04/11_Novembro/26_11_Projeto_Final/) |
 
 ## Avaliações
 
@@ -53,5 +55,6 @@ automaticamente uma atividade concluída.
 
 1. Concluir 10/09 com a experiência e as respostas reais do aluno.
 2. Localizar ou realizar, conforme os enunciados de sala, 17/09, 24/09 e 01/10.
-3. Executar e anexar evidências reais das atividades de 05/11, 12/11 e 19/11.
-4. Ensaiar a apresentação de 26/11 e conferir o checklist do repositório.
+3. Repetir ao vivo a suíte de 24 testes antes da apresentação da Unidade 4.
+4. Ensaiar o roteiro de 26/11 e confirmar a divisão da fala da dupla.
+5. Concluir separadamente a reflexão da Avaliação A1.

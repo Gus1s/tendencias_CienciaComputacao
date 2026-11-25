@@ -1,398 +1,261 @@
-# Documentação do sistema — HelpDesk AI
+# Documentação acadêmica — HelpDesk AI 2.0
 
-## Identificação
+Atualização baseada no commit
+[`8dde18f`](https://github.com/sztsu/helpdesk-ai/commit/8dde18f), consultado em
+25/11/2026.
+
+## 1. Identificação
 
 | Item | Definição |
 |---|---|
-| Tipo de sistema | Sistema interno web e automação Low Code/No Code orientada a eventos |
-| Público principal | Colaboradores, equipe de suporte e gestores de TI |
-| Estágio | Protótipo acadêmico funcional; não homologado para produção |
-| Cenário | Empresa hipotética NexusTech S.A. |
-| Autores | Gustavo Negreiros e João Pedro Alves |
+| Sistema | HelpDesk AI 2.0 — Chatbot e Agente Autônomo de Triagem ITSM |
+| Cenário | empresa hipotética NexusTech S.A. |
+| Tipo | aplicação web zero-build + agente local + integração Low/No Code em nuvem |
+| Público | colaboradores, suporte N1/N2, gestores e auditores |
+| Estágio | protótipo acadêmico funcional; não homologado para produção |
+| Repositório-fonte | <https://github.com/sztsu/helpdesk-ai> |
+| Aplicação | <https://sztsu.github.io/helpdesk-ai/> |
 
-## 1. Visão geral e escopo
+### Autoria e participação
 
-### Objetivo
-
-O HelpDesk AI reduz a triagem manual de chamados. Ele recebe um relato de
-incidente, considera o setor do solicitante, classifica categoria e prioridade,
-estima SLA, seleciona a fila técnica e envia orientações iniciais por e-mail.
-
-### Público-alvo
-
-- colaboradores que precisam registrar problemas de TI;
-- suporte Nível 1, que recebe dados estruturados;
-- equipes de Infraestrutura e Sistemas;
-- gestores que acompanham prioridade e SLA.
-
-### Dentro do escopo atual
-
-- abertura por Google Forms;
-- armazenamento em Google Sheets;
-- orquestração no Make;
-- classificação com Gemini;
-- saída JSON estruturada;
-- atualização da planilha;
-- envio de e-mail pelo Gmail;
-- regras de prioridade por setor;
-- evidências visuais e apresentação acadêmica.
-
-### Fora do escopo atual
-
-- chatbot conversacional executável;
-- aplicativo mobile nativo;
-- autenticação corporativa própria;
-- banco relacional e API REST próprios;
-- execução remota de comandos;
-- fechamento automático do chamado;
-- painel de métricas em tempo real;
-- SLA contratual ou disponibilidade de produção.
-
-## 2. Regras de negócio
-
-1. Todo chamado deve conter nome, e-mail, setor, título e descrição.
-2. A prioridade considera impacto do setor, urgência e natureza do incidente.
-3. Segurança e indisponibilidade crítica devem ser escaladas para humano.
-4. P1 representa impacto crítico; P4 representa baixo impacto.
-5. O agente pode orientar, mas não executar ações na máquina do usuário.
-6. Orientações devem ter no máximo três passos seguros.
-7. Descrições insuficientes exigem complemento, sem diagnóstico inventado.
-8. Credenciais, segredos e dados pessoais desnecessários não devem ser coletados.
-9. A decisão deve registrar categoria, prioridade, SLA, fila e justificativa.
-10. O usuário deve poder solicitar atendimento humano.
-
-### Matriz resumida
-
-| Setor | Impacto-base | Faixa usual |
-|---|---|---|
-| Operações/NOC | altíssimo | P1–P2 |
-| Financeiro | alto | P1–P2 |
-| Engenharia | médio/alto | P2–P3 |
-| Comercial/CX | médio | P2–P3 |
-| RH/Administrativo | baixo/moderado | P3–P4 |
-
-A matriz não substitui a análise do incidente: uma violação de segurança em RH,
-por exemplo, pode exigir prioridade elevada.
-
-## 3. Requisitos funcionais
-
-| ID | Requisito |
+| Integrante | Participação documentada |
 |---|---|
-| RF01 | Permitir abertura de chamado com campos obrigatórios |
-| RF02 | Validar formato de e-mail e setor permitido |
-| RF03 | Registrar a submissão em uma linha da planilha |
-| RF04 | Detectar automaticamente novas linhas |
-| RF05 | Enviar os dados necessários ao modelo de IA |
-| RF06 | Classificar categoria, prioridade, SLA e fila |
-| RF07 | Validar e deserializar a resposta JSON |
-| RF08 | Atualizar a linha original com o resultado |
-| RF09 | Enviar e-mail de confirmação e autoatendimento |
-| RF10 | Registrar falhas para reprocessamento manual |
+| Gustavo Negreiros | concepção e implementação da esteira v1.x e da aplicação v2.0, agente, interface, testes e documentação técnica |
+| João Pedro Alves | integração do projeto no repositório da disciplina, análise dos artefatos, atividades da Unidade 4, reflexão ética e roteiro acadêmico |
 
-### Histórias de usuário
+## 2. Problema e objetivo
 
-- Como colaborador, quero abrir um chamado simples para receber protocolo e orientação.
-- Como analista, quero receber chamados classificados para reduzir a triagem manual.
-- Como gestor, quero visualizar prioridade e SLA para acompanhar riscos.
-- Como usuário, quero solicitar atendimento humano quando a orientação não resolver.
+Uma fila única de suporte não considera o impacto de cada setor, permite urgência
+subjetiva e exige que o Nível 1 faça triagem manual. Um chatbot ingênuo acrescenta
+riscos de vazamento de dados, alucinação, prompt injection e decisões sem direito
+de contestação.
 
-## 4. Requisitos não funcionais
+O sistema recebe o relato em linguagem natural e busca:
 
-| ID | Categoria | Critério |
+1. proteger dados pessoais antes de memória ou rede;
+2. compreender o incidente em diálogo multi-turno;
+3. recuperar um manual interno por RAG;
+4. classificar categoria, prioridade, SLA e fila;
+5. gerar até três orientações seguras;
+6. registrar protocolo e trilha de auditoria;
+7. manter fallback em falha da API externa;
+8. permitir contestação e revisão humana.
+
+## 3. Evolução do projeto
+
+| Versão | Arquitetura | Resultado |
 |---|---|---|
-| RNF01 | Desempenho | resposta-alvo inferior a 1 minuto em condição normal |
-| RNF02 | Segurança | credenciais somente nos cofres das plataformas |
-| RNF03 | Privacidade | minimização e anonimização de dados enviados à IA |
-| RNF04 | Disponibilidade | falha externa não pode apagar a submissão original |
-| RNF05 | Auditabilidade | entrada, saída e horário devem permanecer registrados |
-| RNF06 | Usabilidade | formulário compreensível por usuário não técnico |
-| RNF07 | Escalabilidade | limites de Make/Gemini devem ser monitorados |
-| RNF08 | Manutenibilidade | prompt, regras e campos devem ter versão documentada |
+| v1.x | Forms → Sheets → Make → Gemini → Gmail | triagem assíncrona e e-mail de autoatendimento |
+| v2.0 | Chatbot → Agente 4 camadas → RAG/Tools → Fila/Auditoria | interação em tempo real, privacidade, equidade e testes no navegador |
 
-## 5. Fluxos e protótipo
+O snapshot histórico v1.x está preservado na
+[Unidade 3](../../../Unidade_03/10_Outubro/29_10_Limitacoes_e_Mini_Projeto/HelpDeskAI/).
 
-### Fluxograma principal
+## 4. Escopo
 
-```mermaid
-flowchart TD
-    A[Colaborador abre o Google Forms] --> B[Preenche setor, título e descrição]
-    B --> C{Campos válidos?}
-    C -->|Não| D[Exibir correção necessária]
-    D --> B
-    C -->|Sim| E[Salvar linha no Google Sheets]
-    E --> F[Make detecta nova linha]
-    F --> G[Gemini classifica o chamado]
-    G --> H{JSON válido?}
-    H -->|Não| I[Registrar erro e encaminhar para revisão humana]
-    H -->|Sim| J[Parse JSON separa os campos]
-    J --> K[Atualizar categoria, prioridade, SLA e fila]
-    K --> L[Enviar e-mail com protocolo e orientações]
-    L --> M{Usuário resolveu?}
-    M -->|Sim| N[Registrar resolução]
-    M -->|Não| O[Encaminhar para suporte humano]
-```
+### Incluído na versão 2.0
 
-### Jornada do usuário
+- interface web responsiva em HTML, CSS e JavaScript;
+- motor local determinístico, com conexão opcional ao Gemini 2.5 Flash;
+- quatro camadas visíveis de percepção, memória, planejamento e ação;
+- memória de curto, médio e longo prazo;
+- seis referências internas de conhecimento RAG;
+- mascaramento de CPF, senha, cartão, API key e e-mail pessoal;
+- guardrails de prompt injection, personificação e pedidos destrutivos;
+- criação e consulta de protocolo;
+- fila operacional, aging, contestação humana e backup JSON;
+- fallback local em HTTP 503/429;
+- suíte executável de 24 testes;
+- manutenção da esteira Low/No Code v1.x como integração paralela.
 
-1. acessa o formulário;
-2. informa dados mínimos e descreve o incidente;
-3. recebe confirmação;
-4. aguarda a classificação automática;
-5. recebe e-mail com prioridade, SLA e passos seguros;
-6. tenta a orientação ou procura suporte humano.
+### Fora do escopo
 
-O protótipo visual está evidenciado nas imagens do
-[projeto original](../../../Unidade_03/10_Outubro/29_10_Limitacoes_e_Mini_Projeto/HelpDeskAI/docs/images/).
+- autenticação SSO e controle corporativo de perfis;
+- backend e banco relacional produtivos;
+- integração bidirecional homologada com Jira ou ServiceNow;
+- execução remota de comandos administrativos;
+- atendimento humano ao vivo dentro da interface;
+- SLA contratual, alta disponibilidade ou uso de dados reais.
 
-## 6. Arquitetura e stack
-
-| Camada | Tecnologia | Responsabilidade |
-|---|---|---|
-| Interface | Google Forms | entrada do chamado |
-| Persistência | Google Sheets | fila, dados e resultados |
-| Orquestração | Make | gatilho, integrações e roteamento |
-| Inteligência | Gemini Flash | classificação e geração das orientações |
-| Mensageria | Gmail | notificação ao solicitante |
-| Documentação | Markdown, Mermaid, HTML e PDF | especificação e apresentação |
-
-### Diagrama de componentes
+## 5. Arquitetura do agente
 
 ```mermaid
 flowchart LR
-    U[Usuário] --> F[Google Forms]
-    F --> S[(Google Sheets)]
-    S --> M[Make]
-    M --> G[Gemini API]
-    G --> M
-    M --> S
-    M --> E[Gmail]
-    E --> U
-    M --> H[Suporte humano]
+    U[Colaborador] --> C[Chatbot Web]
+    C --> L1[1. Percepção e PII]
+    L1 --> L2[2. Memória 3D e RAG]
+    L2 --> L3[3. Planejamento, Guardrails e Equidade]
+    L3 -->|bloqueado| A[Log adversarial]
+    L3 -->|aprovado| L4[4. Ação e Tools]
+    L4 --> Q[Fila e Accountability]
+    L4 --> R[Protocolo e Guia Seguro]
+    R --> H[Contestação / Revisão Humana]
 ```
 
-### Sequência simplificada
+### Camada 1 — Percepção e Privacy by Design
 
-```mermaid
-sequenceDiagram
-    participant U as Usuário
-    participant F as Forms/Sheets
-    participant M as Make
-    participant G as Gemini
-    participant E as Gmail
-    U->>F: envia chamado
-    F-->>M: nova linha
-    M->>G: contexto + regras + incidente
-    G-->>M: JSON de triagem
-    M->>F: atualiza classificação
-    M->>E: envia resposta
-    E-->>U: protocolo e orientações
-```
+`perceiveAndSanitize()` identifica dados pessoais e substitui o conteúdo por
+marcadores antes de persistência ou chamada externa.
 
-## 7. Modelo de dados
+### Camada 2 — Memória em três dimensões
 
-O protótipo usa uma planilha como tabela `chamados`.
-
-| Campo | Tipo lógico | Obrigatório | Descrição |
-|---|---|---:|---|
-| protocolo | texto | sim | identificador único |
-| criado_em | data/hora | sim | horário da submissão |
-| nome | texto | sim | nome do solicitante |
-| email | texto | sim | canal de retorno |
-| setor | enum | sim | um dos cinco setores |
-| titulo | texto | sim | resumo do incidente |
-| descricao | texto longo | sim | relato do problema |
-| categoria | enum | após triagem | classificação técnica |
-| prioridade | enum P1–P4 | após triagem | impacto calculado |
-| sla_estimado | texto | após triagem | prazo orientativo |
-| fila_responsavel | enum | após triagem | equipe de destino |
-| orientacoes | texto longo | após triagem | passos de autoatendimento |
-| justificativa | texto | após triagem | motivo da classificação |
-| status | enum | sim | novo, triado, escalado ou resolvido |
-| erro_processamento | texto | não | falha para reprocessamento |
-
-Relacionamento atual: cada submissão gera um chamado e uma classificação. Uma
-evolução para banco relacional deve separar usuários, setores, chamados,
-interações e histórico de status.
-
-## 8. APIs e contratos
-
-O protótipo não expõe API REST própria. Os contratos relevantes são as
-integrações das plataformas.
-
-### Contrato de entrada do agente
-
-```json
-{
-  "protocolo": "HD-2026-0001",
-  "setor": "Financeiro e Faturamento",
-  "titulo": "ERP indisponível",
-  "descricao": "Mensagem de erro ao emitir nota fiscal"
-}
-```
-
-### Contrato de saída do Gemini
-
-```json
-{
-  "categoria": "Software",
-  "prioridade": "P2",
-  "sla_estimado": "1 hora",
-  "fila_responsavel": "Nível 2 Sistemas",
-  "orientacoes": [
-    "Confirme se outros usuários apresentam o mesmo erro",
-    "Registre o horário e a mensagem exibida",
-    "Não repita a emissão para evitar duplicidade"
-  ],
-  "requer_humano": true,
-  "justificativa": "Falha no ERP afeta faturamento"
-}
-```
-
-### Autenticação
-
-- OAuth2 nas conexões Google do Make;
-- chave/credencial do Gemini no cofre da plataforma;
-- nenhuma credencial deve ser armazenada no GitHub.
-
-### Erros previstos
-
-| Código lógico | Situação | Tratamento |
+| Dimensão | Implementação | Finalidade |
 |---|---|---|
-| VALIDATION_ERROR | campo ausente ou inválido | solicitar correção |
-| AI_INVALID_JSON | resposta fora do contrato | registrar e revisar |
-| AI_UNAVAILABLE | timeout ou HTTP 503 | repetir com limite e escalar |
-| SHEET_UPDATE_ERROR | falha ao atualizar linha | preservar entrada e reprocessar |
-| EMAIL_ERROR | envio não concluído | registrar falha e notificar suporte |
+| curto prazo | últimos turnos e esclarecimento pendente | completar relatos vagos |
+| médio prazo | tickets sanitizados em `localStorage` | histórico e reincidência |
+| longo prazo | `KNOWLEDGE_BASE` com seis manuais | ancorar orientações em RAG |
 
-## 9. Como rodar o projeto
+### Camada 3 — Planejamento, segurança e equidade
 
-### Pré-requisitos
+Interpreta a intenção, aplica guardrails e calcula uma decisão que combina setor,
+gravidade técnica, urgência, reincidência e aging. Tom hostil não reduz prioridade.
 
-- conta Google com Forms, Sheets e Gmail;
-- conta Make com acesso às conexões Google;
-- acesso ao Gemini no módulo utilizado;
-- navegador atualizado;
-- cópia das regras e do schema JSON.
+### Camada 4 — Ação e ferramentas
 
-### Configuração local/nuvem
+| Tool | Resultado auditável |
+|---|---|
+| `sanitize_pii` | texto sanitizado e tipos removidos |
+| `search_knowledge_base` | referência `KB-XXX` e termos correspondentes |
+| `evaluate_business_sla` | prioridade, SLA e fila |
+| `create_ticket` | protocolo `HD-2026-XXX` |
+| `query_ticket_status` | estado do protocolo |
+| `request_clarification` | pergunta objetiva sem criar ticket |
+| `activate_fallback_contingency` | motor local em falha da API |
 
-1. duplicar o formulário e vinculá-lo a uma planilha;
-2. criar as colunas do dicionário de dados;
-3. criar cenário no Make com `Watch New Rows`;
-4. configurar o módulo Gemini e o prompt versionado;
-5. adicionar `Parse JSON` com o contrato de saída;
-6. mapear `Update a Row` para a linha original;
-7. configurar o Gmail para enviar a resposta;
-8. armazenar credenciais somente nas conexões do Make;
-9. executar testes com dados fictícios antes de ativar o cenário.
+## 6. Regras de negócio
 
-Não há comando de instalação local porque o MVP é composto por serviços em
-nuvem. O HTML dos slides pode ser aberto diretamente no navegador.
+1. Prioridade combina setor, impacto, urgência e tipo de incidente.
+2. Relato insuficiente gera esclarecimento, não diagnóstico inventado.
+3. Orientações devem vir de manual RAG e ter no máximo três passos seguros.
+4. PII deve ser removida antes de memória persistente ou rede.
+5. Prompt injection e comandos destrutivos não criam ticket.
+6. Reincidência pode promover chamados P3/P4 e reduzir o SLA.
+7. Aging evita que áreas administrativas fiquem indefinidamente sem atendimento.
+8. Toda decisão deve ter justificativa, referência e log.
+9. O usuário pode contestar a classificação e solicitar humano.
+10. Falha externa deve acionar contingência, sem perder o relato.
 
-## 10. Deploy, infraestrutura e operação
+## 7. Requisitos funcionais
 
-O deploy do protótipo consiste em publicar o Forms, restringir a planilha e
-ativar o cenário do Make. Antes de produção real seriam necessários ambiente de
-homologação, contas corporativas, revisão LGPD, gestão de segredos, alertas,
-monitoramento de cotas e SLA dos provedores.
+| ID | Requisito |
+|---|---|
+| RF-01 | atender por chat em linguagem natural |
+| RF-02 | mascarar PII automaticamente |
+| RF-03 | pedir esclarecimento em diálogo multi-turno |
+| RF-04 | recuperar conteúdo da base RAG |
+| RF-05 | classificar categoria, prioridade, SLA e fila |
+| RF-06 | criar e consultar protocolo |
+| RF-07 | bloquear pedidos adversariais e destrutivos |
+| RF-08 | exibir telemetria das quatro camadas |
+| RF-09 | gerenciar fila, aging e backup JSON |
+| RF-10 | permitir contestação humana |
+| RF-11 | apagar memória local por solicitação do usuário |
+| RF-12 | executar 24 testes no navegador |
 
-### Logs e monitoramento
+## 8. Requisitos não funcionais
 
-- histórico de execuções do Make;
-- coluna de erro e status na planilha;
-- logs de resposta e latência sem dados sensíveis;
-- alertas para falhas consecutivas e aproximação da cota mensal.
-
-## 11. Backup e contingência
-
-### Backup
-
-- exportar periodicamente a planilha para XLSX ou CSV;
-- manter cópia do formulário e das regras de negócio;
-- exportar o blueprint do cenário Make quando disponível;
-- versionar documentação e prompts no Git, sem credenciais;
-- registrar versão, data e responsável por cada backup.
-
-### Contingência
-
-1. se o Gemini falhar, manter o chamado como `novo` e enviar à triagem humana;
-2. se o Make falhar, preservar a linha da planilha e reprocessar depois;
-3. se o Gmail falhar, registrar o erro e usar canal alternativo;
-4. em incidente de privacidade, desativar o cenário, preservar logs, revogar
-   credenciais e comunicar o responsável;
-5. testar restauração regularmente, não apenas criação do backup.
-
-## 12. Testes e critérios de aceite
-
-| Cenário | Entrada | Resultado esperado |
+| ID | Categoria | Critério acadêmico |
 |---|---|---|
-| Operação crítica | cluster indisponível no NOC | P1/P2 e Infraestrutura |
-| Financeiro | ERP impede emissão fiscal | P1/P2 e Sistemas |
-| Administrativo | impressora offline | P3/P4 e orientação segura |
-| Relato ambíguo | “computador não funciona” | pedir complemento |
-| Segurança | suspeita de credencial vazada | humano e sem instrução invasiva |
-| JSON inválido | resposta fora do schema | registrar erro, não corromper linha |
-| API indisponível | timeout/503 | reprocessar com limite e escalar |
+| RNF-01 | desempenho | motor local responde em milissegundos; carga < 500 ms |
+| RNF-02 | segurança | zero execução destrutiva e zero segredo versionado |
+| RNF-03 | privacidade | PII mascarada antes de persistência ou rede |
+| RNF-04 | resiliência | fallback em HTTP 503/429 |
+| RNF-05 | auditabilidade | tools, decisão, horário e remediação registrados |
+| RNF-06 | portabilidade | execução zero-build em navegador moderno |
+| RNF-07 | usabilidade | linguagem simples, protocolo e guia objetivo |
+| RNF-08 | manutenibilidade | regras, testes e versões documentados no Git |
 
-Critérios gerais: registro íntegro, classificação explicável, e-mail entregue,
-nenhuma credencial no repositório e possibilidade de intervenção humana.
+## 9. Dados principais
 
-## 13. Padrões, Git e histórico
+| Campo | Finalidade |
+|---|---|
+| `id` | protocolo único |
+| `createdAt` | data e hora |
+| `collaborator` | solicitante da demonstração |
+| `sectorId` | setor corporativo |
+| `summary` | relato já sanitizado |
+| `category` | categoria técnica |
+| `priority` | P1 a P4 |
+| `slaMinutes` | SLA calculado |
+| `queue` | fila humana responsável |
+| `kbRef` | manual RAG utilizado |
+| `status` | estado do chamado |
+| `contested` | contestação humana acionada |
 
-- Markdown para documentação e Mermaid para diagramas;
-- nomes de pastas no padrão `DD_MM_Tema`;
-- commits pequenos e descritivos, com data real;
-- branches para mudanças e revisão antes da `main`;
-- autoria da dupla preservada no `ORIGEM.md`;
-- mudanças relevantes registradas no histórico Git;
-- nunca versionar tokens, arquivos `.env` ou dados pessoais reais.
+## 10. Privacidade, viés e responsabilidade
 
-## 14. Guia do usuário
+- textos são sanitizados antes de serem gravados;
+- API key opcional permanece em `sessionStorage`;
+- botão **Limpar Memória (LGPD)** permite exclusão local;
+- linguagem informal e tom hostil possuem testes próprios;
+- nomes diferentes com relato idêntico devem gerar a mesma decisão;
+- reincidência e aging mitigam inanição de setores de menor peso;
+- contestação garante remediação humana;
+- a fila N1/N2 continua responsável pelo resultado final.
 
-### Abrir chamado
+## 11. Testes
 
-1. abrir o formulário oficial;
-2. informar nome e e-mail corporativo;
-3. selecionar o setor correto;
-4. escrever título curto e descrição objetiva;
-5. remover senhas, tokens ou dados pessoais do relato;
-6. enviar e aguardar o e-mail de retorno.
+A referência canônica é a suíte `TC-01` a `TC-24` implementada em
+`HelpDeskAgent.runAutomatedTestSuite()` e descrita em
+[`docs/06_testes_manutencao_changelog.md`](https://github.com/sztsu/helpdesk-ai/blob/main/docs/06_testes_manutencao_changelog.md).
 
-### Após receber a resposta
+| Grupo | Casos | Cobertura |
+|---|---|---|
+| funcional | TC-01 a TC-06 | cinco setores e consulta de protocolo |
+| viés | TC-07, TC-08 e TC-19 a TC-21 | linguagem, tom, gênero, reincidência e aging |
+| adversarial | TC-09 a TC-13 | prompt injection e comandos destrutivos |
+| privacidade | TC-14 a TC-16 | CPF, senha, API key, e-mail e cartão |
+| resiliência | TC-17 e TC-24 | HTTP 503 e rajada de 30 chamados |
+| diálogo | TC-18 e TC-23 | relato vago e dois turnos |
+| remediação | TC-22 | contestação e log humano |
 
-1. conferir protocolo, prioridade e SLA;
-2. seguir apenas orientações consideradas seguras;
-3. não compartilhar credenciais;
-4. se não resolver, solicitar atendimento humano e informar o protocolo.
+O repositório-fonte apresenta evidência visual de **24/24 casos aprovados**. Esse
+resultado pertence à execução registrada pelo projeto e pode ser reproduzido na
+aba **Testes Adversariais & Stress**.
 
-### FAQ
+## 12. Execução
 
-**A prioridade informada pelo usuário é definitiva?**
+### Pela web
 
-Não. A prioridade é calculada conforme impacto, urgência e regras do setor.
+1. abrir <https://sztsu.github.io/helpdesk-ai/>;
+2. selecionar nome e setor fictícios;
+3. usar um cenário rápido ou digitar o incidente;
+4. observar a telemetria das quatro camadas;
+5. executar a suíte completa na aba de testes.
 
-**O sistema resolve o problema automaticamente?**
+### Localmente
 
-Não. Ele classifica e oferece orientações iniciais; o suporte humano continua responsável.
+```bash
+git clone https://github.com/sztsu/helpdesk-ai.git
+cd helpdesk-ai
+start index.html
+```
 
-**Posso enviar senha ou token?**
+Não é necessário build. Para evitar limitações de `file://`, também é possível
+servir a pasta com `python -m http.server 8080`.
 
-Não. Credenciais nunca devem constar no chamado.
+## 13. Operação e contingência
 
-**O chatbot já está implementado?**
+- API Gemini indisponível: ativar motor local + RAG e registrar fallback;
+- entrada com PII: mascarar e recomendar troca de senha exposta;
+- decisão contestada: mover para revisão humana;
+- memória local: permitir exclusão e exportação JSON;
+- evolução futura: backend autenticado, banco relacional, RBAC, monitoramento e
+  integração ITSM corporativa.
 
-Não há interface conversacional comprovada no repositório; existe uma especificação acadêmica para evolução.
+## 14. Limitações
 
-**O sistema está pronto para produção?**
+O protótipo não comprova segurança, desempenho ou justiça em produção. Os 24 casos
+são uma suíte controlada e não substituem avaliação contínua com amostras reais,
+revisão jurídica, teste de acessibilidade, pentest, homologação e monitoramento de
+drift. A persistência no navegador também não é apropriada para dados corporativos
+reais sem controles adicionais.
 
-Não. É um protótipo acadêmico que exige controles corporativos, testes e homologação.
+## 15. Referências do projeto
 
-## 15. Limitações e próximos passos
-
-- implementar o NexusBot e testar transferência para humano;
-- substituir planilha por banco com histórico imutável;
-- criar autenticação corporativa e controle por perfil;
-- adotar RAG com base de conhecimento aprovada;
-- criar painel de SLA e auditoria;
-- adicionar anonimização automática;
-- executar avaliação de viés e segurança antes de produção.
+- [README e portal técnico](https://github.com/sztsu/helpdesk-ai)
+- [Arquitetura, dados e APIs](https://github.com/sztsu/helpdesk-ai/blob/main/docs/03_arquitetura_agente_e_dados.md)
+- [Ética, vieses e governança](https://github.com/sztsu/helpdesk-ai/blob/main/docs/04_etica_vieses_e_governanca.md)
+- [Testes e manutenção](https://github.com/sztsu/helpdesk-ai/blob/main/docs/06_testes_manutencao_changelog.md)
+- [Guia do usuário](https://github.com/sztsu/helpdesk-ai/blob/main/docs/07_guia_do_usuario_faq.md)
+- [Registro local de fontes e autoria](../../REFERENCIAS_HELPDESK_AI_2_0.md)
