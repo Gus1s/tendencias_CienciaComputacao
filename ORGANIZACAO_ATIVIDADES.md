@@ -35,10 +35,11 @@ automaticamente uma atividade concluída.
 
 | Data | Atividade do plano | Situação | Local |
 |---|---|---|---|
-| 05/11 | Chatbot | Parcial; há agente de triagem, não chatbot comprovado | [Pendência](Unidade_04/11_Novembro/05_11_Agentes_de_IA_e_Chatbot/) |
-| 12/11 | Estudo de caso sobre dados sensíveis | Parcial; há análise de LGPD no projeto | [Pendência](Unidade_04/11_Novembro/12_11_Privacidade_e_Seguranca/) |
-| 19/11 | Debate orientado sobre viés | Prevista | [Pendência](Unidade_04/11_Novembro/19_11_Vies_e_Responsabilidade_Social/) |
-| 26/11 | Trabalho em grupo e exposição do projeto final | Prevista | [Pendência](Unidade_04/11_Novembro/26_11_Projeto_Final/) |
+| 05/11 | Criação de agentes de IA (1,0) | Especificação e roteiro de testes incluídos; evidências do aluno a anexar | [Atividade](Unidade_04/11_Novembro/05_11_Criacao_de_Agentes_de_IA/) |
+| 12/11 | Chatbot e ferramentas, com especificação (1,0) | Especificação completa; interface executável ainda não comprovada | [Atividade](Unidade_04/11_Novembro/12_11_Chatbot_e_Ferramentas/) |
+| 19/11 | Viés algorítmico e responsabilidade social (1,0) | Análise orientada e roteiro de teste incluídos | [Atividade](Unidade_04/11_Novembro/19_11_Vies_e_Responsabilidade_Social/) |
+| 26/11 | Apresentação da solução inteligente (1,0) | Projeto e documentação completa vinculados | [Atividade](Unidade_04/11_Novembro/26_11_Projeto_Final/) |
+| 26/11 | Integração dos conceitos e participação no GitHub (1,0) | Checklist de organização, documentação e histórico incluído | [Atividade](Unidade_04/11_Novembro/26_11_Projeto_Final/) |
 
 ## Avaliações
 
@@ -52,5 +53,5 @@ automaticamente uma atividade concluída.
 
 1. Concluir 10/09 com a experiência e as respostas reais do aluno.
 2. Localizar ou realizar, conforme os enunciados de sala, 17/09, 24/09 e 01/10.
-3. Confirmar se o HelpDesk AI pode ser aceito para 05/11 e 12/11.
-4. Produzir 19/11, 26/11 e as avaliações somente com enunciado e evidência reais.
+3. Executar e anexar evidências reais das atividades de 05/11, 12/11 e 19/11.
+4. Ensaiar a apresentação de 26/11 e conferir o checklist do repositório.
